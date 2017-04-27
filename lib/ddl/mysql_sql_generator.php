@@ -214,7 +214,7 @@ class mysql_sql_generator extends sql_generator {
         $size = $this->guess_antelope_row_size($xmldb_table->getFields());
         if ($size > self::ANTELOPE_MAX_ROW_SIZE) {
             if ($this->mdb->is_compressed_row_format_supported()) {
-                $rowformat = "\n ROW_FORMAT=Compressed";
+                $rowformat = "\n ROW_FORMAT=Dynamic";
             }
         }
 
@@ -312,7 +312,7 @@ class mysql_sql_generator extends sql_generator {
                     $format = strtolower($this->mdb->get_row_format($tablename));
                     if ($format === 'compact' or $format === 'redundant') {
                         // Change the format before conversion so that we do not run out of space.
-                        array_unshift($sqls, "ALTER TABLE {$this->prefix}$tablename ROW_FORMAT=Compressed");
+                        array_unshift($sqls, "ALTER TABLE {$this->prefix}$tablename ROW_FORMAT=Dynamic");
                     }
                 }
             }
