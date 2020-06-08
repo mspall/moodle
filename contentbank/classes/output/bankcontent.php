@@ -75,22 +75,80 @@ class bankcontent implements renderable, templatable {
         global $PAGE;
 
         $PAGE->requires->js_call_amd('core_contentbank/search', 'init');
+        $PAGE->requires->js_call_amd('core_contentbank/sort', 'init');
 
         $data = new stdClass();
         $contentdata = array();
         foreach ($this->contents as $content) {
-            $record = $content->get_content();
+            $file = $content->get_file();
+            $filesize = $file ? $file->get_filesize() : 0;
+            $mimetype = $file ? get_mimetype_description($file) : '';
             $contenttypeclass = $content->get_content_type().'\\contenttype';
             $contenttype = new $contenttypeclass($this->context);
             $name = $content->get_name();
             $contentdata[] = array(
                 'name' => $name,
+                'title' => strtolower($name),
                 'link' => $contenttype->get_view_url($content),
-                'icon' => $contenttype->get_icon($content)
+                'icon' => $contenttype->get_icon($content),
+                'timemodified' => $content->get_timemodified(),
+                'bytes' => $filesize,
+                'size' => display_size($filesize),
+                'type' => $mimetype
             );
         }
+        $data->viewlist = get_user_preferences('core_contentbank_view_list');
         $data->contents = $contentdata;
-        $data->tools = $this->toolbar;
+        // The tools are displayed in the action bar on the index page.
+        foreach ($this->toolbar as $tool) {
+            // Customize the output of a tool, like dropdowns.
+            $method = 'export_tool_'.$tool['action'];
+            if (method_exists($this, $method)) {
+                $this->$method($tool);
+            }
+            $data->tools[] = $tool;
+        }
+
         return $data;
+    }
+
+    /**
+     * Adds the content type items to display to the Add dropdown.
+     *
+     * Each content type is represented as an object with the properties:
+     *     - name: the name of the content type.
+     *     - baseurl: the base content type editor URL.
+     *     - types: different types of the content type to display as dropdown items.
+     *
+     * @param array $tool Data for rendering the Add dropdown, including the editable content types.
+     */
+    private function export_tool_add(array &$tool) {
+        $editabletypes = $tool['contenttypes'];
+
+        $addoptions = [];
+        foreach ($editabletypes as $class => $type) {
+            $contentype = new $class($this->context);
+            // Get the creation options of each content type.
+            $types = $contentype->get_contenttype_types();
+            if ($types) {
+                // Add a text describing the content type as first option. This will be displayed in the drop down to
+                // separate the options for the different content types.
+                $contentdesc = new stdClass();
+                $contentdesc->typename = get_string('description', $contentype->get_contenttype_name());
+                array_unshift($types, $contentdesc);
+                // Context data for the template.
+                $addcontenttype = new stdClass();
+                // Content type name.
+                $addcontenttype->name = $type;
+                // Content type editor base URL.
+                $tool['link']->param('plugin', $type);
+                $addcontenttype->baseurl = $tool['link']->out();
+                // Different types of the content type.
+                $addcontenttype->types = $types;
+                $addoptions[] = $addcontenttype;
+            }
+        }
+
+        $tool['contenttypes'] = $addoptions;
     }
 }

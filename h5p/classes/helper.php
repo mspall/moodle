@@ -75,6 +75,10 @@ class helper {
             ];
             $options = ['disable' => self::get_display_options($core, $config)];
 
+            // Add the 'title' if exists from 'h5p.json' data to keep it for the editor.
+            if (!empty($h5pvalidator->h5pC->mainJsonData['title'])) {
+                $content['title'] = $h5pvalidator->h5pC->mainJsonData['title'];
+            }
             $h5pstorage->savePackage($content, null, $skipcontent, $options);
 
             return $h5pstorage->contentId;
@@ -428,5 +432,51 @@ class helper {
         }
 
         return $strings;
+    }
+
+    /**
+     * Get the information related to the H5P export file.
+     * The information returned will be:
+     * - filename, filepath, mimetype, filesize, timemodified and fileurl.
+     *
+     * @param  string $exportfilename The H5P export filename (with slug).
+     * @param  \moodle_url $url The URL of the exported file.
+     * @param  factory $factory The \core_h5p\factory object
+     * @return array|null The information export file otherwise null.
+     */
+    public static function get_export_info(string $exportfilename, \moodle_url $url = null, ?factory $factory = null): ?array {
+
+        if (!$factory) {
+            $factory = new factory();
+        }
+        $core = $factory->get_core();
+
+        // Get export file.
+        if (!$fileh5p = $core->fs->get_export_file($exportfilename)) {
+            return null;
+        }
+
+        // Build the export info array.
+        $file = [];
+        $file['filename'] = $fileh5p->get_filename();
+        $file['filepath'] = $fileh5p->get_filepath();
+        $file['mimetype'] = $fileh5p->get_mimetype();
+        $file['filesize'] = $fileh5p->get_filesize();
+        $file['timemodified'] = $fileh5p->get_timemodified();
+
+        if (!$url) {
+            $url  = \moodle_url::make_webservice_pluginfile_url(
+                $fileh5p->get_contextid(),
+                $fileh5p->get_component(),
+                $fileh5p->get_filearea(),
+                '',
+                '',
+                $fileh5p->get_filename()
+            );
+        }
+
+        $file['fileurl'] = $url->out(false);
+
+        return $file;
     }
 }
