@@ -9663,16 +9663,8 @@ input[disabled] {
   transition: opacity .7s ease 0s, visibility .1s ease .8s;
   display: block;
   position: fixed;
-  /* IE compatibility hack */
   bottom: 50px;
   right: 0; }
-  @supports (position: sticky) {
-    #goto-top-link {
-      position: sticky; } }
-  @supports (-ms-ime-align: auto) {
-    #goto-top-link {
-      position: fixed;
-      /* Edge compatibility hack */ } }
   #goto-top-link a {
     position: absolute;
     right: 0;
@@ -9814,6 +9806,11 @@ a.dropdown-toggle:focus:hover,
 .moodle-dialogue-base .closebutton:focus:hover,
 button.close:focus:hover {
   text-decoration: none; }
+
+.safari input[type="checkbox"].focus, .safari input[type="checkbox"]:focus,
+.safari input[type="radio"].focus,
+.safari input[type="radio"]:focus {
+  outline: auto; }
 
 .usermenu a,
 .usermenu a[role="button"],
@@ -11001,6 +10998,14 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
   .modchooser .modal-body .carousel-item .loading-icon .icon {
     margin: 1em auto; }
 
+.modchooser .modal-footer {
+  height: 70px;
+  background: #fff; }
+  .modchooser .modal-footer .moodlenet-logo .icon {
+    height: 2.5rem;
+    width: 6rem;
+    margin-bottom: .6rem; }
+
 .modchoosercontainer.noscroll {
   overflow-y: hidden; }
 
@@ -11038,7 +11043,7 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  min-height: 640px; }
+  height: 640px; }
   .modchooser .modal-body .optionsummary .content {
     overflow-y: auto; }
     .modchooser .modal-body .optionsummary .content .heading .icon {
@@ -11631,6 +11636,10 @@ body.h5p-embed .h5pmessages {
   overflow-wrap: break-word !important;
   /* stylelint-disable-line declaration-no-important */ }
 
+.z-index-0 {
+  z-index: 0 !important;
+  /* stylelint-disable-line declaration-no-important */ }
+
 .z-index-1 {
   z-index: 1 !important;
   /* stylelint-disable-line declaration-no-important */ }
@@ -11821,6 +11830,18 @@ body.h5p-embed .h5pmessages {
   .navbar.fixed-top {
     position: relative;
     z-index: inherit; } }
+
+.link-underline {
+  text-decoration: underline; }
+  .link-underline:focus {
+    text-decoration: none; }
+
+.alert.cta .icon {
+  padding: 0.3rem; }
+  .alert.cta .icon.fa {
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 0.125rem; }
 
 .icon {
   font-size: 16px;
@@ -12625,8 +12646,8 @@ body.h5p-embed .h5pmessages {
   margin-top: 0; }
 
 .block_recentlyaccesseditems img.icon {
-  height: auto;
-  width: auto;
+  height: 24px;
+  width: 24px;
   margin-right: 6px; }
 
 .block_myoverview .content {
@@ -15678,6 +15699,7 @@ body.jsenabled .questionflag input[type=checkbox] {
 
 #page-mod-quiz-edit ul.slots .activityinstance > a {
   display: flex;
+  max-width: 100%;
   align-items: center;
   text-indent: 0;
   padding-left: 0; }

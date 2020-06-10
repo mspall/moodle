@@ -671,6 +671,14 @@ $functions = array(
         'type' => 'read',
         'ajax' => true,
     ),
+    'core_course_get_activity_chooser_footer' => array(
+        'classname' => 'core_course_external',
+        'methodname' => 'get_activity_chooser_footer',
+        'classpath' => 'course/externallib.php',
+        'description' => 'Fetch the data for the activity chooser footer.',
+        'type' => 'read',
+        'ajax' => true,
+    ),
     'core_course_toggle_activity_recommendation' => array(
         'classname' => 'core_course_external',
         'methodname' => 'toggle_activity_recommendation',
@@ -2799,6 +2807,25 @@ $functions = array(
         'type'          => 'write',
         'ajax'          => 'true',
         'capabilities'  => 'moodle/contentbank:manageowncontent',
+    ],
+    'core_create_userfeedback_action_record' => [
+        'classname'     => 'core\external\userfeedback\record_action',
+        'methodname'    => 'execute',
+        'classpath'     => '',
+        'description'   => 'Record the action that the user takes in the user feedback notification for future use.',
+        'type'          => 'write',
+        'ajax'          => 'true',
+        'capabilities'  => '',
+    ],
+    'core_get_userfeedback_url' => [
+        'classname'     => 'core\external\userfeedback\generate_url',
+        'methodname'    => 'execute',
+        'classpath'     => '',
+        'description'   => 'Generate a dynamic URL for the external user feedback site.' .
+                           ' The URL includes some parameters to pre-fill the user feedback form.',
+        'type'          => 'read',
+        'ajax'          => 'true',
+        'capabilities'  => '',
     ],
 );
 

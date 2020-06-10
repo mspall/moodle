@@ -75,6 +75,10 @@ class helper {
             ];
             $options = ['disable' => self::get_display_options($core, $config)];
 
+            // Add the 'title' if exists from 'h5p.json' data to keep it for the editor.
+            if (!empty($h5pvalidator->h5pC->mainJsonData['title'])) {
+                $content['title'] = $h5pvalidator->h5pC->mainJsonData['title'];
+            }
             $h5pstorage->savePackage($content, null, $skipcontent, $options);
 
             return $h5pstorage->contentId;
@@ -355,7 +359,7 @@ class helper {
             'crossorigin' => null,
             'libraryConfig' => $core->h5pF->getLibraryConfig(),
             'pluginCacheBuster' => self::get_cache_buster(),
-            'libraryUrl' => autoloader::get_h5p_core_library_url('core/js')
+            'libraryUrl' => autoloader::get_h5p_core_library_url('js')->out(),
         );
 
         return $settings;
