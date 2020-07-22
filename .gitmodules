@@ -8,3 +8,6 @@
 [submodule "lib/editor/atto/plugins/chemistry"]
 	path = lib/editor/atto/plugins/chemistry
 	url = https://github.com/geoffrowland/moodle-editor_atto-chemistry.git
+[submodule "lib/editor/atto/plugins/morefontcolors"]
+	path = lib/editor/atto/plugins/morefontcolors
+	url = https://github.com/ndunand/moodle-atto_morefontcolors.git
