@@ -25,3 +25,6 @@
 	path = lib/editor/atto/plugins/wiris
 	url = https://github.com/mspall/moodle-atto_wiris.git
 	branch = release
+[submodule "report/editdates"]
+	path = report/editdates
+	url = https://github.com/moodleou/moodle-report_editdates.git
