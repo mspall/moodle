@@ -31,3 +31,6 @@
 [submodule "filter/bookchapters"]
 	path = filter/bookchapters
 	url = https://github.com/Syxton/moodle-filter_bookchapters.git
+[submodule "local/lessonexport"]
+	path = local/lessonexport
+	url = https://github.com/SHEilds/moodle-local_lessonexport.git
