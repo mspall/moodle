@@ -37,3 +37,6 @@
 [submodule "mod/workshop/eval/credit"]
 	path = mod/workshop/eval/credit
 	url = https://github.com/mudrd8mz/moodle-workshopeval_credit.git
+[submodule "question/type/multichoiceset"]
+	path = question/type/multichoiceset
+	url = https://github.com/ecampbell/moodle-qtype_multichoiceset
