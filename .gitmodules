@@ -34,3 +34,6 @@
 [submodule "local/lessonexport"]
 	path = local/lessonexport
 	url = https://github.com/SHEilds/moodle-local_lessonexport.git
+[submodule "mod/workshop/eval/credit"]
+	path = mod/workshop/eval/credit
+	url = https://github.com/mudrd8mz/moodle-workshopeval_credit.git
