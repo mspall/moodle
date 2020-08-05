@@ -44,3 +44,6 @@
 	path = enrol/lmb
 	url = https://github.com/mspall/Banner-Luminis-Message-Broker-for-Moodle.git
 	branch = Release_32_isu
+[submodule "mod/zoom"]
+	path = mod/zoom
+	url = https://github.com/ucla/moodle-mod_zoom.git
