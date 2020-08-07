@@ -50,8 +50,10 @@ class auth extends base {
 
         // These two are always enabled and can't be disabled.
         $enabled = array('nologin'=>'nologin', 'manual'=>'manual');
-        foreach (explode(',', $CFG->auth) as $auth) {
-            $enabled[$auth] = $auth;
+        if (!empty($CFG->auth)) {
+            foreach (explode(',', $CFG->auth) as $auth) {
+                $enabled[$auth] = $auth;
+            }
         }
 
         return $enabled;
