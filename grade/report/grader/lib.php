@@ -661,7 +661,9 @@ class grade_report_grader extends grade_report {
 
         $arrows = $this->get_sort_arrows($extrafields);
 
-        $colspan = 1 + $hasuserreportcell + count($extrafields);
+        // ISU - Remove user field columns (MDL_34682)
+        // $colspan = 1 + $hasuserreportcell + count($extrafields);
+        $colspan = 1 + $hasuserreportcell;
 
         $levels = count($this->gtree->levels) - 1;
 
@@ -695,15 +697,16 @@ class grade_report_grader extends grade_report {
 
         $headerrow->cells[] = $studentheader;
 
-        foreach ($extrafields as $field) {
-            $fieldheader = new html_table_cell();
-            $fieldheader->attributes['class'] = 'header userfield user' . $field;
-            $fieldheader->scope = 'col';
-            $fieldheader->header = true;
-            $fieldheader->text = $arrows[$field];
-
-            $headerrow->cells[] = $fieldheader;
-        }
+        // ISU - Remove user field columns (MDL_34682)
+        // foreach ($extrafields as $field) {
+        //    $fieldheader = new html_table_cell();
+        //    $fieldheader->attributes['class'] = 'header userfield user' . $field;
+        //    $fieldheader->scope = 'col';
+        //    $fieldheader->header = true;
+        //    $fieldheader->text = $arrows[$field];
+        //
+        //    $headerrow->cells[] = $fieldheader;
+        // }
 
         $rows[] = $headerrow;
 
@@ -728,11 +731,22 @@ class grade_report_grader extends grade_report {
                 $usercell->text = $OUTPUT->user_picture($user, ['link' => false, 'visibletoscreenreaders' => false]);
             }
 
+            // ISU - Remove user field columns (MDL_34682). Replace with tooltip when mousing over name.
+            $userinfostring = null;
+            foreach ($extrafields as $field) {
+                if (!$userinfostring) {
+                    $userinfostring = $user->{$field};
+                } else {
+                    $userinfostring .= ', ' . $user->{$field};
+                }
+            }
+
+
             $fullname = fullname($user, $viewfullnames);
             $usercell->text = html_writer::link(
                     new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $this->course->id]),
                     $usercell->text . $fullname,
-                    ['class' => 'username']
+                    ['class' => 'username', 'title' => $userinfostring] // ISU - Display user info fields as tooltip
             );
 
             if (!empty($user->suspendedenrolment)) {
@@ -774,13 +788,14 @@ class grade_report_grader extends grade_report {
                 $userrow->cells[] = $userreportcell;
             }
 
-            foreach ($extrafields as $field) {
-                $fieldcell = new html_table_cell();
-                $fieldcell->attributes['class'] = 'userfield user' . $field;
-                $fieldcell->header = false;
-                $fieldcell->text = s($user->{$field});
-                $userrow->cells[] = $fieldcell;
-            }
+            // ISU - Remove user field columns (MDL_34682)
+            // foreach ($extrafields as $field) {
+            //     $fieldcell = new html_table_cell();
+            //     $fieldcell->attributes['class'] = 'userfield user' . $field;
+            //     $fieldcell->header = false;
+            //     $fieldcell->text = s($user->{$field});
+            //     $userrow->cells[] = $fieldcell;
+            // }
 
             $userrow->attributes['data-uid'] = $userid;
             $rows[] = $userrow;
