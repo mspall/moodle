@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['addblock'] = 'Add feedback block'; // ISU
 $string['add_item'] = 'Add question';
 $string['add_pagebreak'] = 'Add a page break';
 $string['adjustment'] = 'Adjustment';
@@ -50,6 +51,7 @@ $string['complete_the_form'] = 'Answer the questions';
 $string['completed'] = 'Completed';
 $string['completedon'] = 'Completed on {$a}';
 $string['completionsubmit'] = 'View as completed if the feedback is submitted';
+$string['configaddblock'] = 'Automatically add the feedback block to a mapped course.'; // ISU
 $string['configallowfullanonymous'] = 'If set to \'yes\', users can complete a feedback activity on the front page without being required to log in.';
 $string['confirmdeleteentry'] = 'Are you sure you want to delete this entry?';
 $string['confirmdeleteitem'] = 'Are you sure you want to delete this element?';

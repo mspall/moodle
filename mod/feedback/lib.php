@@ -2518,12 +2518,35 @@ function feedback_get_courses_from_sitecourse_map($feedbackid) {
  */
 function feedback_update_sitecourse_map($feedback, $courses) {
     global $DB;
+    global $CFG; //ISU
     if (empty($courses)) {
         $courses = array();
     }
     $currentmapping = $DB->get_fieldset_select('feedback_sitecourse_map', 'courseid', 'feedbackid=?', array($feedback->id));
     foreach (array_diff($courses, $currentmapping) as $courseid) {
         $DB->insert_record('feedback_sitecourse_map', array('feedbackid' => $feedback->id, 'courseid' => $courseid));
+
+    // ISU - Automatically add Feedback block to mapped course (temporary workaround until mapping events are added)
+        if (isset($CFG->feedback_addblock) AND $CFG->feedback_addblock) {
+            // if there isn't a feedback block in the course, add one
+            $coursecontext = context_course::instance($courseid);
+            if (!$DB->record_exists('block_instances', array('blockname'=>'feedback', 'parentcontextid'=>$coursecontext->id))) {
+                // create a block instance
+                $feedbackinstance = new stdClass;
+                $feedbackinstance->blockname = 'feedback';
+                $feedbackinstance->parentcontextid = $coursecontext->id;
+                $feedbackinstance->showinsubcontexts = 0;
+                $feedbackinstance->pagetypepattern = 'course-view-*';
+                $feedbackinstance->defaultregion = 'side-post';
+                $feedbackinstance->defaultweight = $DB->count_records('block_instances', array('parentcontextid' => $coursecontext->id, 'defaultregion' => 'side-post'));
+                $feedbackinstance->timecreated = time();
+                $feedbackinstance->timemodified = $feedbackinstance->timecreated;
+                if (!$DB->insert_record('block_instances',$feedbackinstance)) {
+                    print_error("Couldn't add feedback block to course");
+                }
+            }
+        }
+
     }
     foreach (array_diff($currentmapping, $courses) as $courseid) {
         $DB->delete_records('feedback_sitecourse_map', array('feedbackid' => $feedback->id, 'courseid' => $courseid));
