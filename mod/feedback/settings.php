@@ -22,4 +22,11 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configselect('feedback_allowfullanonymous',
                                     get_string('allowfullanonymous', 'feedback'),
                                     $str, 0, $options));
+
+   // ISU - new admin setting to auto-add feedback block to mapped courses
+    $settings->add(new admin_setting_configselect('feedback_addblock',
+                                    get_string('addblock', 'feedback'),
+                                    get_string('configaddblock', 'feedback'),
+                                    0, $options));
+
 }
