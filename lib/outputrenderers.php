@@ -991,7 +991,8 @@ class core_renderer extends renderer_base {
         // but some of the content won't be known until later, so we return a placeholder
         // for now. This will be replaced with the real content in {@link core_renderer::footer()}.
         $output = '';
-        if ($this->page->pagelayout !== 'embedded' && !empty($CFG->additionalhtmlfooter)) {
+        // ISU - Don't display additional footer on popups
+        if ($this->page->pagelayout !== 'embedded' && $this->page->pagelayout !== 'popup' && !empty($CFG->additionalhtmlfooter)) {
             $output .= "\n".$CFG->additionalhtmlfooter;
         }
         $output .= $this->unique_end_html_token;
