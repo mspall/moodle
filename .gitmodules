@@ -50,3 +50,6 @@
 [submodule "mod/hvp"]
 	path = mod/hvp
 	url = https://github.com/h5p/h5p-moodle-plugin
+[submodule "mod/quiz/accessrule/delayed"]
+	path = mod/quiz/accessrule/delayed
+	url = https://github.com/juacas/quizaccess_delayed.git
