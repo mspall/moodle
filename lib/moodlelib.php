@@ -6401,6 +6401,9 @@ function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', 
  */
 function can_send_from_real_email_address($from, $user, $unused = null) {
     global $CFG;
+    if ($from->id == $user->id) {
+        return false;
+    }
     if (!isset($CFG->allowedemaildomains) || empty(trim($CFG->allowedemaildomains))) {
         return false;
     }
