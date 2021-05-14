@@ -73,7 +73,7 @@ function cron_run() {
     cron_run_scheduled_tasks($timenow);
 
     // Run adhoc tasks.
-    cron_run_adhoc_tasks($timenow);
+    // cron_run_adhoc_tasks($timenow);
 
     mtrace("Cron script completed correctly");
 
