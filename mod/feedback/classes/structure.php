@@ -354,11 +354,11 @@ class mod_feedback_structure {
         $this->allcourses = array();
         foreach ($list as $course) {
             context_helper::preload_from_record($course);
-            if (!$course->visible &&
-                !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id), $this->userid)) {
-                // Do not return courses that current user can not see.
-                continue;
-            }
+            //if (!$course->visible &&
+            //    !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id), $this->userid)) {
+            //    // Do not return courses that current user can not see.
+            //    continue;
+            //}
             $label = get_course_display_name_for_list($course);
             $this->allcourses[$course->id] = $label;
         }
