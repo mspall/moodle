@@ -85,6 +85,9 @@ class css_text_has_contrast extends brickfield_accessibility_color_test {
                     if (substr($background, 0, 3) == "rgb") {
                         $background = '#' . $this->convert_color($background);
                     }
+                    if($background == 'transparent'){
+                        $background = $this->defaultbackground;
+                    }
 
                     $luminosity = $this->get_luminosity($style['color'], $background);
                     $fontsize = 0;
