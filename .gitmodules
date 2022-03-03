@@ -1,0 +1,4 @@
+[submodule "theme/bengal"]
+	path = theme/bengal
+	url = https://github.com/maccmaxitrc/theme_bengal.git
+	branch = main
