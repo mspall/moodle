@@ -12036,13 +12036,19 @@ input[disabled] {
     width: 100%; }
   .breadcrumb:not(:empty) {
     width: 100%;
-    border: 2px solid #e9ecef;
-    padding: 0.25rem;
+    flex-wrap: nowrap;
     margin-bottom: 0.5rem; }
     .breadcrumb:not(:empty) .breadcrumb-item {
       padding-top: 0.3333333333rem;
       padding-bottom: 0.3333333333rem;
-      display: inline-block; }
+      display: inline-flex;
+      overflow: hidden;
+      flex-grow: 1; }
+    .breadcrumb:not(:empty) .breadcrumb-item a,
+    .breadcrumb:not(:empty) .breadcrumb-item span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
   .mform {
     width: 100%;
     padding-right: 15px;
@@ -12353,6 +12359,9 @@ body.dragging .dragging {
     margin: 0;
     height: 24px;
     width: 24px; }
+  .activityiconcontainer.small {
+    width: 40px;
+    height: 40px; }
 
 .activityiconcontainer.administration {
   background-color: #5d63f6; }
@@ -12586,7 +12595,9 @@ body.dragging .dragging {
   margin: 0; }
 
 .path-admin .header-maxwidth,
-.path-admin .secondary-navigation {
+.path-admin .secondary-navigation,
+.format-site .header-maxwidth,
+.format-site .secondary-navigation {
   max-width: none; }
 
 .plugincheckwrapper {
@@ -13053,12 +13064,11 @@ body.dragging .dragging {
   .dashboard-card-deck:not(.fixed-width-cards) .dashboard-card {
     width: calc(33.33% - 0.5rem); } }
 
-@media (min-width: 1200px) {
-  #block-region-side-pre .dashboard-card-deck:not(.fixed-width-cards) {
-    margin-left: 0;
-    margin-right: 0; }
-    #block-region-side-pre .dashboard-card-deck:not(.fixed-width-cards) .dashboard-card {
-      width: calc(100% - 0.5rem) !important; } }
+#block-region-side-pre .dashboard-card-deck:not(.fixed-width-cards) {
+  margin-left: 0;
+  margin-right: 0; }
+  #block-region-side-pre .dashboard-card-deck:not(.fixed-width-cards) .dashboard-card {
+    width: calc(100% - 0.5rem) !important; }
 
 .block_recentlyaccessedcourses .paging-bar-container {
   margin-top: -2.4rem;
@@ -14219,11 +14229,14 @@ span.editinstructions {
     color: #00171b; }
 
 .dndupload-preview {
-  color: #909090;
-  border: 1px dashed #909090;
-  list-style: none;
-  margin-top: .2em;
-  padding: .3em; }
+  padding: 1rem;
+  background-color: #0f6cbf;
+  color: #fff;
+  text-align: center;
+  font-size: 1.171875rem;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 0.5rem; }
 
 .dndupload-hidden {
   display: none; }
@@ -14681,7 +14694,7 @@ span.editinstructions {
   list-style: none;
   padding-left: 0;
   border-bottom: 1px solid #dee2e6; }
-  .course-section:last-child {
+  .course-section:last-child:not(.section-summary) {
     border-bottom: 0; }
   .course-section .sectionbadges .badge {
     margin-left: 0.5rem; }
@@ -14704,6 +14717,24 @@ span.editinstructions {
     margin: 3px;
     white-space: nowrap;
     display: inline-block; }
+  .course-section.dndupload-dropzone {
+    border: 2px dashed #0f6cbf;
+    padding-left: 2px;
+    padding-right: 2px;
+    position: relative; }
+    .course-section.dndupload-dropzone .dndupload-preview-overlay {
+      background-color: #fff;
+      opacity: 0.8;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+    .course-section.dndupload-dropzone .dndupload-preview-wrapper {
+      position: absolute;
+      top: 0;
+      padding: 2rem;
+      width: 100%; }
 
 .description .course-description-item {
   font-size: 80%;
