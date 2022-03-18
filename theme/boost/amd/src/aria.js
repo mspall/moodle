@@ -238,7 +238,7 @@ const updateTabFocus = e => {
     const arrowPrevious = vertical ? 'ArrowUp' : (rtl ? 'ArrowRight' : 'ArrowLeft');
     const tabs = Array.prototype.filter.call(
         tabList.querySelectorAll('[role="tab"]'),
-        tab => getComputedStyle(tab).display !== 'none'); // We only work with the visible tabs.
+        tab => !!tab.offsetHeight); // We only work with the visible tabs.
 
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].index = i;
@@ -293,8 +293,8 @@ const tabElementFix = () => {
     });
 
     document.addEventListener('click', e => {
-        if (e.target.matches('[role="tablist"] [role="tab"]')) {
-            const tabs = e.target.closest('[role="tablist"]').querySelectorAll('[role="tab"]');
+        if (e.target.matches('[role="tablist"] [data-toggle="tab"], [role="tablist"] [data-toggle="pill"]')) {
+            const tabs = e.target.closest('[role="tablist"]').querySelectorAll('[data-toggle="tab"], [data-toggle="pill"]');
             e.preventDefault();
             $(e.target).tab('show');
             tabs.forEach(tab => {
@@ -305,8 +305,26 @@ const tabElementFix = () => {
     });
 };
 
+/**
+ * Fix keyboard interaction with Bootstrap Collapse elements.
+ *
+ * @see {@link https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure|WAI-ARIA Authoring Practices 1.1 - Disclosure (Show/Hide)}
+ */
+const collapseFix = () => {
+    document.addEventListener('keydown', e => {
+        if (e.target.matches('[data-toggle="collapse"]')) {
+            // Pressing space should toggle expand/collapse.
+            if (e.key === ' ') {
+                e.preventDefault();
+                e.target.click();
+            }
+        }
+    });
+};
+
 export const init = () => {
     dropdownFix();
     autoFocus();
     tabElementFix();
+    collapseFix();
 };
