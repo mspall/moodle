@@ -12603,6 +12603,12 @@ body.dragging .dragging {
 .format-site .secondary-navigation {
   max-width: none; }
 
+.path-admin.path-admin-roles:not(.format-site) .header-maxwidth,
+.path-admin.path-admin-roles:not(.format-site) .secondary-navigation,
+.path-admin.path-admin-tool-lp .header-maxwidth,
+.path-admin.path-admin-tool-lp .secondary-navigation {
+  max-width: 830px; }
+
 .plugincheckwrapper {
   width: 100%; }
 
@@ -14882,7 +14888,7 @@ span.editinstructions {
   [data-region="drawer"] {
     padding: 20px 20px; }
   .jsenabled .btn-footer-popover {
-    transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease; } }
+    transition: 0.2s; } }
   @media (min-width: 576px) and (prefers-reduced-motion: reduce) {
     .jsenabled .btn-footer-popover {
       transition: none; } }
@@ -14967,7 +14973,7 @@ body.drawer-ease {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); }
 
 .drawer {
-  transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease;
+  transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease, visibility 0.2s ease;
   background-color: #f8f9fa;
   z-index: 1050;
   position: fixed;
@@ -14981,18 +14987,22 @@ body.drawer-ease {
   .drawer.drawer-right {
     width: 315px;
     max-width: 315px;
-    right: calc(-315px + -10px); }
+    right: calc(-315px + -10px);
+    visibility: hidden; }
     .drawer.drawer-right.show {
-      right: 0; }
+      right: 0;
+      visibility: visible; }
     .drawer.drawer-right .drawertoggle {
       margin-left: auto;
       margin-right: 5px; }
   .drawer.drawer-left {
     width: 285px;
     max-width: 285px;
-    left: calc(-285px + -10px); }
+    left: calc(-285px + -10px);
+    visibility: hidden; }
     .drawer.drawer-left.show {
-      left: 0; }
+      left: 0;
+      visibility: visible; }
     .drawer.drawer-left .drawertoggle {
       margin-right: auto;
       margin-left: 5px; }
@@ -15023,7 +15033,7 @@ body.drawer-ease {
 @media (max-width: 991.98px) {
   .drawer-md {
     display: block;
-    transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease;
+    transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease, visibility 0.2s ease;
     background-color: #f8f9fa;
     z-index: 1050;
     position: fixed;
@@ -15039,18 +15049,22 @@ body.drawer-ease {
     .drawer-md.drawer-right {
       width: 315px;
       max-width: 315px;
-      right: calc(-315px + -10px); }
+      right: calc(-315px + -10px);
+      visibility: hidden; }
       .drawer-md.drawer-right.show {
-        right: 0; }
+        right: 0;
+        visibility: visible; }
       .drawer-md.drawer-right .drawertoggle {
         margin-left: auto;
         margin-right: 5px; }
     .drawer-md.drawer-left {
       width: 285px;
       max-width: 285px;
-      left: calc(-285px + -10px); }
+      left: calc(-285px + -10px);
+      visibility: hidden; }
       .drawer-md.drawer-left.show {
-        left: 0; }
+        left: 0;
+        visibility: visible; }
       .drawer-md.drawer-left .drawertoggle {
         margin-right: auto;
         margin-left: 5px; }
@@ -15062,7 +15076,7 @@ body.drawer-ease {
 @media (max-width: 767.98px) {
   .drawer-sm {
     display: block;
-    transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease;
+    transition: left 0.2s ease, right 0.2s ease, top 0.2s ease, bottom 0.2s ease, visibility 0.2s ease;
     background-color: #f8f9fa;
     z-index: 1050;
     position: fixed;
@@ -15078,18 +15092,22 @@ body.drawer-ease {
     .drawer-sm.drawer-right {
       width: 315px;
       max-width: 315px;
-      right: calc(-315px + -10px); }
+      right: calc(-315px + -10px);
+      visibility: hidden; }
       .drawer-sm.drawer-right.show {
-        right: 0; }
+        right: 0;
+        visibility: visible; }
       .drawer-sm.drawer-right .drawertoggle {
         margin-left: auto;
         margin-right: 5px; }
     .drawer-sm.drawer-left {
       width: 285px;
       max-width: 285px;
-      left: calc(-285px + -10px); }
+      left: calc(-285px + -10px);
+      visibility: hidden; }
       .drawer-sm.drawer-left.show {
-        left: 0; }
+        left: 0;
+        visibility: visible; }
       .drawer-sm.drawer-left .drawertoggle {
         margin-right: auto;
         margin-left: 5px; }
@@ -17648,6 +17666,9 @@ textarea[data-auto-rows] {
   .login-container .login-languagemenu {
     display: flex;
     justify-content: flex-start; }
+    .login-container .login-languagemenu .dropdown-menu {
+      max-height: 300px;
+      overflow-y: auto; }
   .login-container .login-logo {
     display: flex;
     justify-content: center;
