@@ -2,3 +2,7 @@
 	path = theme/bengal
 	url = https://github.com/maccmaxitrc/theme_bengal.git
 	branch = main
+[submodule "filter/newwindowicon"]
+	path = filter/newwindowicon
+	url = https://github.com/maccmaxitrc/moodle-filter_newwindowicon.git
+	branch = main
