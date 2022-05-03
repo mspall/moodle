@@ -44,7 +44,7 @@ abstract class tool_generator_backend {
     /**
      * @var int Default size index
      */
-    const DEFAULT_SIZE = 3;
+    const DEFAULT_SIZE = 1;
 
     /**
      * @var bool True if we want a fixed dataset or false to generate random data
