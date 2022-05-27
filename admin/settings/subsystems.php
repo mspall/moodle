@@ -34,6 +34,16 @@ if ($hassiteconfig) { // speedup for non-admins, add all caps used on this page
     $optionalsubsystems->add(new admin_setting_configselect('completiondefault', new lang_string('completiondefault', 'completion'),
             new lang_string('configcompletiondefault', 'completion'), 1, $options));
 
+    $optionalsubsystems->add(new admin_setting_configcheckbox('activityindentation_enable',
+			new lang_string('activityindentation_enable'), new lang_string('activityindentation_enable_desc'), 0));
+
+    $options = array(
+        0 => get_string('activityindentation_off'),
+        1 => get_string('activityindentation_on')
+    );
+    $optionalsubsystems->add(new admin_setting_configselect('activityindentation_default',
+			new lang_string('activityindentation_default'), new lang_string('activityindentation_default_desc'), 0, $options));
+
     $optionalsubsystems->add($checkbox = new admin_setting_configcheckbox('enableavailability',
             new lang_string('enableavailability', 'availability'),
             new lang_string('enableavailability_desc', 'availability'), 1));

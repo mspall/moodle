@@ -541,6 +541,15 @@ define('COURSE_DISPLAY_SINGLEPAGE', 0);
 define('COURSE_DISPLAY_MULTIPAGE', 1);
 
 /**
+ * Activity indentation settings: activity indentation off.
+ */
+define('ACTIVITY_INDENTATION_OFF', 0);
+/**
+ * Activity indentation settings: activity indentation on.
+ */
+define('ACTIVITY_INDENTATION_ON', 1);
+
+/**
  * Authentication constant: String used in password field when password is not stored.
  */
 define('AUTH_PASSWORD_NOT_CACHED', 'not cached');

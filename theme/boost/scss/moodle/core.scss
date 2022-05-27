@@ -1124,6 +1124,7 @@ tr.flagged-tag a {
 @include media-breakpoint-up(sm) {
     $mod-indent-size: 30px;
     /* Creates a series of .mod-indent-# rule declarations based on indent size and number of indent levels. */
+    /* Also creates a series of .activity-indent-# rules based on same criteria. */
 
     @for $i from 1 through 16 {
         $width: ($i * $mod-indent-size);
@@ -1131,10 +1132,16 @@ tr.flagged-tag a {
         .mod-indent-#{$i} {
             width: $width;
         }
+        .activity-indent-#{$i} {
+            margin-left: $width;
+        }
     }
 
     .mod-indent-huge {
         width: (16 * $mod-indent-size);
+    }
+    .activity-indent-huge {
+        margin-left: (16 * $mod-indent-size);
     }
 }
 

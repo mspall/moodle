@@ -50,6 +50,9 @@ class format_weeks extends core_courseformat\base {
     }
 
     public function uses_indentation(): bool {
+        if ($GLOBALS['CFG']->activityindentation_enable && $this->course->activityindentation) {
+            return true;
+        }
         return false;
     }
 
@@ -271,11 +274,18 @@ class format_weeks extends core_courseformat\base {
                     'default' => $courseconfig->coursedisplay ?? COURSE_DISPLAY_SINGLEPAGE,
                     'type' => PARAM_INT,
                 ),
+                'activityindentation' => array(
+                    'default' => $GLOBALS['CFG']->activityindentation_default,
+                    'type' => PARAM_BOOL,
+                ),
                 'automaticenddate' => array(
                     'default' => 1,
                     'type' => PARAM_BOOL,
-                ),
+                )
             );
+            if (!$GLOBALS['CFG']->activityindentation_enable){
+                unset($courseformatoptions['activityindentation']);
+            }
         }
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
             $courseformatoptionsedit = array(
@@ -303,6 +313,18 @@ class format_weeks extends core_courseformat\base {
                     'help' => 'coursedisplay',
                     'help_component' => 'moodle',
                 ),
+                'activityindentation' => array(
+                    'label' => new lang_string('activityindentation'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(
+                        array(
+                            ACTIVITY_INDENTATION_OFF => new lang_string('activityindentation_off'),
+                            ACTIVITY_INDENTATION_ON => new lang_string('activityindentation_on'),
+                        )
+                    ),
+                    'help' => 'activityindentation',
+                    'help_component' => 'moodle',
+                ),
                 'automaticenddate' => array(
                     'label' => new lang_string('automaticenddate', 'format_weeks'),
                     'help' => 'automaticenddate',
@@ -310,6 +332,9 @@ class format_weeks extends core_courseformat\base {
                     'element_type' => 'advcheckbox',
                 )
             );
+            if (!$GLOBALS['CFG']->activityindentation_enable){
+                unset($courseformatoptionsedit['activityindentation']);
+            }
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
         return $courseformatoptions;

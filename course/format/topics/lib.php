@@ -51,6 +51,9 @@ class format_topics extends core_courseformat\base {
     }
 
     public function uses_indentation(): bool {
+        if ($GLOBALS['CFG']->activityindentation_enable && $this->course->activityindentation) {
+            return true;
+        }
         return false;
     }
 
@@ -259,7 +262,14 @@ class format_topics extends core_courseformat\base {
                     'default' => $courseconfig->coursedisplay,
                     'type' => PARAM_INT,
                 ],
+                'activityindentation' => [
+                    'default' => $GLOBALS['CFG']->activityindentation_default,
+                    'type' => PARAM_INT,
+                ]
             ];
+            if (!$GLOBALS['CFG']->activityindentation_enable){
+                unset($courseformatoptions['activityindentation']);
+            }
         }
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
             $courseformatoptionsedit = [
@@ -287,7 +297,22 @@ class format_topics extends core_courseformat\base {
                     'help' => 'coursedisplay',
                     'help_component' => 'moodle',
                 ],
+                'activityindentation' => [
+                    'label' => new lang_string('activityindentation'),
+                    'element_type' => 'select',
+                    'element_attributes' => [
+                        [
+                            ACTIVITY_INDENTATION_OFF => new lang_string('activityindentation_off'),
+                            ACTIVITY_INDENTATION_ON => new lang_string('activityindentation_on'),
+                        ],
+                    ],
+                    'help' => 'activityindentation',
+                    'help_component' => 'moodle',
+                ]
             ];
+            if (!$GLOBALS['CFG']->activityindentation_enable){
+                unset($courseformatoptionsedit['activityindentation']);
+            }
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
         return $courseformatoptions;
