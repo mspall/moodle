@@ -46,3 +46,7 @@
 	path = lib/editor/atto/plugins/chemistry
 	url = https://github.com/mspall/moodle-editor_atto-chemistry.git
 	branch = master
+[submodule "lib/editor/atto/plugins/morefontcolors"]
+	path = lib/editor/atto/plugins/morefontcolors
+	url = https://github.com/mspall/moodle-atto_morefontcolors.git
+	branch = master
