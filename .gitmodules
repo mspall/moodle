@@ -62,3 +62,7 @@
 	path = mod/quiz/accessrule/delayed
 	url = https://github.com/mspall/quizaccess_delayed.git
 	branch = master
+[submodule "mod/workshop/eval/credit"]
+	path = mod/workshop/eval/credit
+	url = https://github.com/mspall/moodle-workshopeval_credit.git
+	branch = master
