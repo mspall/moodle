@@ -30,3 +30,7 @@
 	path = lib/editor/atto/plugins/wiris
 	url = https://github.com/mspall/moodle-atto_wiris.git
 	branch = stable-wiris
+[submodule "question/type/multichoiceset"]
+	path = question/type/multichoiceset
+	url = https://github.com/mspall/moodle-qtype_multichoiceset.git
+	branch = MOODLE_39_STABLE
