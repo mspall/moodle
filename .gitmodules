@@ -50,3 +50,7 @@
 	path = lib/editor/atto/plugins/morefontcolors
 	url = https://github.com/mspall/moodle-atto_morefontcolors.git
 	branch = master
+[submodule "filter/bookchapters"]
+	path = filter/bookchapters
+	url = https://github.com/mspall/moodle-filter_bookchapters.git
+	branch = master
