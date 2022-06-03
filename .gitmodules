@@ -66,3 +66,7 @@
 	path = mod/workshop/eval/credit
 	url = https://github.com/mspall/moodle-workshopeval_credit.git
 	branch = master
+[submodule "local/lessonexport"]
+	path = local/lessonexport
+	url = https://github.com/mspall/moodle-local_lessonexport.git
+	branch = master
