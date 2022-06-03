@@ -54,3 +54,7 @@
 	path = filter/bookchapters
 	url = https://github.com/mspall/moodle-filter_bookchapters.git
 	branch = master
+[submodule "report/editdates"]
+	path = report/editdates
+	url = https://github.com/mspall/moodle-report_editdates.git
+	branch = main-issue36
