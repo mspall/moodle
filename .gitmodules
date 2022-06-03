@@ -38,3 +38,7 @@
 	path = admin/tool/deletecourses
 	url = https://github.com/mspall/moodle-tool_deletecourses.git
 	branch = main
+[submodule "report/benchmark"]
+	path = report/benchmark
+	url = https://github.com/mspall/moodle-report_benchmark.git
+	branch = master
