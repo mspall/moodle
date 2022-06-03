@@ -58,3 +58,7 @@
 	path = report/editdates
 	url = https://github.com/mspall/moodle-report_editdates.git
 	branch = main-issue36
+[submodule "mod/quiz/accessrule/delayed"]
+	path = mod/quiz/accessrule/delayed
+	url = https://github.com/mspall/quizaccess_delayed.git
+	branch = master
