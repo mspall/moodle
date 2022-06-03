@@ -22,3 +22,7 @@
 	path = blocks/attendance
 	url = https://github.com/mspall/moodle-block_attendance.git
 	branch = main
+[submodule "filter/wiris"]
+	path = filter/wiris
+	url = https://github.com/mspall/moodle-filter_wiris.git
+	branch = stable-wiris
