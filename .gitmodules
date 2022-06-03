@@ -18,3 +18,7 @@
 	path = mod/attendance
 	url = https://github.com/mspall/moodle-mod_attendance.git
 	branch = MOODLE_400_STABLE
+[submodule "blocks/attendance"]
+	path = blocks/attendance
+	url = https://github.com/mspall/moodle-block_attendance.git
+	branch = main
