@@ -34,3 +34,7 @@
 	path = question/type/multichoiceset
 	url = https://github.com/mspall/moodle-qtype_multichoiceset.git
 	branch = MOODLE_39_STABLE
+[submodule "admin/tool/deletecourses"]
+	path = admin/tool/deletecourses
+	url = https://github.com/mspall/moodle-tool_deletecourses.git
+	branch = main
