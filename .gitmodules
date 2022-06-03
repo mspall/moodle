@@ -14,3 +14,7 @@
 	path = blocks/completion_progress
 	url = https://github.com/mspall/moodle-block_completion_progress.git
 	branch = master
+[submodule "mod/attendance"]
+	path = mod/attendance
+	url = https://github.com/mspall/moodle-mod_attendance.git
+	branch = MOODLE_400_STABLE
