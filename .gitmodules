@@ -6,3 +6,7 @@
 	path = filter/newwindowicon
 	url = https://github.com/maccmaxitrc/moodle-filter_newwindowicon.git
 	branch = main
+[submodule "local/adminer"]
+	path = local/adminer
+	url = https://github.com/mspall/moodle-local_adminer.git
+	branch = MOODLE_39_STABLE
