@@ -26,3 +26,7 @@
 	path = filter/wiris
 	url = https://github.com/mspall/moodle-filter_wiris.git
 	branch = stable-wiris
+[submodule "lib/editor/atto/plugins/wiris"]
+	path = lib/editor/atto/plugins/wiris
+	url = https://github.com/mspall/moodle-atto_wiris.git
+	branch = stable-wiris
