@@ -70,3 +70,7 @@
 	path = local/lessonexport
 	url = https://github.com/mspall/moodle-local_lessonexport.git
 	branch = master
+[submodule "enrol/lmb"]
+	path = enrol/lmb
+	url = https://github.com/mspall/Banner-Luminis-Message-Broker-for-Moodle.git
+	branch = Release_32_isu
