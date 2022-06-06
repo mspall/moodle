@@ -652,7 +652,7 @@ class grade_report_grader extends grade_report {
 
         $arrows = $this->get_sort_arrows($extrafields);
 
-        $colspan = 1 + $hasuserreportcell + count($extrafields);
+        $colspan = 1 + $hasuserreportcell; //ISU - Change user field columns to tooltip (MDL_34682, MDL-45817)
 
         $levels = count($this->gtree->levels) - 1;
 
@@ -690,15 +690,7 @@ class grade_report_grader extends grade_report {
             $headerrow->cells[] = $emptyheader;
         }
 
-        foreach ($extrafields as $field) {
-            $fieldheader = new html_table_cell();
-            $fieldheader->attributes['class'] = 'userfield user' . $field;
-            $fieldheader->scope = 'col';
-            $fieldheader->header = true;
-            $fieldheader->text = $arrows[$field];
-
-            $headerrow->cells[] = $fieldheader;
-        }
+        //ISU - Change user field columns to tooltip (MDL_34682, MDL-45817)
 
         $rows[] = $headerrow;
 
@@ -723,11 +715,21 @@ class grade_report_grader extends grade_report {
                 $usercell->text = $OUTPUT->user_picture($user, ['link' => false, 'visibletoscreenreaders' => false]);
             }
 
+            //ISU - Change user field columns to tooltip (MDL_34682, MDL-45817)
+            $userinfostring = null;
+            foreach ($extrafields as $field) {
+                if (!$userinfostring) {
+                    $userinfostring = $user->{$field};
+                } else {
+                    $userinfostring .= ', ' . $user->{$field};
+                }
+            }
+
             $fullname = fullname($user, $viewfullnames);
             $usercell->text = html_writer::link(
                     new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $this->course->id]),
                     $usercell->text . $fullname,
-                    ['class' => 'username']
+                    ['class' => 'username', 'title' => $userinfostring] //ISU - Change user field columns to tooltip (MDL_34682, MDL-45817)
             );
 
             if (!empty($user->suspendedenrolment)) {
@@ -773,13 +775,7 @@ class grade_report_grader extends grade_report {
                 $userrow->cells[] = $userreportcell;
             }
 
-            foreach ($extrafields as $field) {
-                $fieldcell = new html_table_cell();
-                $fieldcell->attributes['class'] = 'userfield user' . $field;
-                $fieldcell->header = false;
-                $fieldcell->text = s($user->{$field});
-                $userrow->cells[] = $fieldcell;
-            }
+            //ISU - Change user field columns to tooltip (MDL_34682, MDL-45817)
 
             $userrow->attributes['data-uid'] = $userid;
             $rows[] = $userrow;
