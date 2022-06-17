@@ -78,3 +78,7 @@
 	path = lib/editor/atto/plugins/loom
 	url = https://github.com/maccmaxitrc/moodle-atto_loom.git
 	branch = main
+[submodule "filter/loom"]
+	path = filter/loom
+	url = https://github.com/maccmaxitrc/moodle-filter_loom.git
+	branch = main
