@@ -74,3 +74,7 @@
 	path = enrol/lmb
 	url = https://github.com/mspall/Banner-Luminis-Message-Broker-for-Moodle.git
 	branch = Release_32_isu
+[submodule "lib/editor/atto/plugins/loom"]
+	path = lib/editor/atto/plugins/loom
+	url = https://github.com/maccmaxitrc/moodle-atto_loom.git
+	branch = main
