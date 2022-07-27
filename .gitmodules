@@ -90,3 +90,7 @@
 	path = blocks/bfmanager
 	url = https://github.com/mspall/bfmanager.git
 	branch = main
+[submodule "local/bfaltformat"]
+	path = local/bfaltformat
+	url = https://github.com/mspall/bfaltformat.git
+	branch = main
