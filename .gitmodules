@@ -94,3 +94,7 @@
 	path = local/bfaltformat
 	url = https://github.com/mspall/bfaltformat.git
 	branch = main
+[submodule "lib/editor/atto/plugins/bflink"]
+	path = lib/editor/atto/plugins/bflink
+	url = https://github.com/mspall/bflink.git
+	branch = main
