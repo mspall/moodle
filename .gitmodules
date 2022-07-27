@@ -106,3 +106,7 @@
 	path = local/bfnewwindow
 	url = https://github.com/mspall/bfnewwindow.git
 	branch = main
+[submodule "report/editlicence"]
+	path = report/editlicence
+	url = https://github.com/mspall/editlicence.git
+	branch = main
