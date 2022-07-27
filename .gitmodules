@@ -86,3 +86,7 @@
 	path = admin/tool/bfplus
 	url = https://github.com/mspall/bfplus.git
 	branch = main
+[submodule "blocks/bfmanager"]
+	path = blocks/bfmanager
+	url = https://github.com/mspall/bfmanager.git
+	branch = main
