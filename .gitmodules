@@ -102,3 +102,7 @@
 	path = filter/bfurltolink
 	url = https://github.com/mspall/bfurltolink.git
 	branch = main
+[submodule "local/bfnewwindow"]
+	path = local/bfnewwindow
+	url = https://github.com/mspall/bfnewwindow.git
+	branch = main
