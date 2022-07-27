@@ -98,3 +98,7 @@
 	path = lib/editor/atto/plugins/bflink
 	url = https://github.com/mspall/bflink.git
 	branch = main
+[submodule "filter/bfurltolink"]
+	path = filter/bfurltolink
+	url = https://github.com/mspall/bfurltolink.git
+	branch = main
