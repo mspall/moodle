@@ -82,3 +82,7 @@
 	path = filter/loom
 	url = https://github.com/maccmaxitrc/moodle-filter_loom.git
 	branch = main
+[submodule "admin/tool/bfplus"]
+	path = admin/tool/bfplus
+	url = https://github.com/mspall/bfplus.git
+	branch = main
