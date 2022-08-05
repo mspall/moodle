@@ -82,8 +82,12 @@ class qtype_missingtype_question extends question_definition
     }
 
     public function start_attempt(question_attempt_step $step, $variant) {
-        throw new coding_exception('This question is of a type that is not installed ' .
-                'on your system. No processing is possible.');
+        if (!$GLOBALS["quizobj"]->is_preview_user()) {
+            $fixurl = new moodle_url("/course/view.php", array('id' => $GLOBALS["COURSE"]->id));
+            print_error("quizquestionalldrafts_student", '', $fixurl);
+        }
+        $fixurl = new moodle_url("/mod/quiz/edit.php", array('cmid' => $GLOBALS["cm"]->id));
+        print_error("quizquestionalldrafts_preview", '', $fixurl);
     }
 
     public function grade_response(array $response) {

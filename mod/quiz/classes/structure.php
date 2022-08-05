@@ -676,6 +676,18 @@ class structure {
     public function get_version_choices_for_slot(int $slotnumber): array {
         $slot = $this->get_slot_by_number($slotnumber);
 
+        // If the questionid has an 's' in it, this question likely has only draft versions.
+        // The error generated below will direct users to the solution.
+        if (stripos($slot->questionid, 's') !== false) {
+            $slot = qbank_helper::get_question_structure_bugfix($this->quizobj->get_quizid(), $this->quizobj->get_context(), $slot->slotid);
+            $entryid = reset($slot) -> questionbankentryid;
+            $cmid = $GLOBALS["cmid"];
+            $returnurl = "/mod/quiz/edit.php?cmid=$cmid";
+            $courseid = $GLOBALS["course"]->id;
+            $fixurl = new \moodle_url('/question/bank/history/history.php', array('entryid' => $entryid, 'returnurl' => $returnurl, 'courseid' => $courseid));
+            print_error("quizquestionalldrafts", '', $fixurl);
+        }
+
         // Get all the versions which exist.
         $versions = qbank_helper::get_version_options($slot->questionid);
         $latestversion = reset($versions);
