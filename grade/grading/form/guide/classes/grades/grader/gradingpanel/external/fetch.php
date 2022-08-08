@@ -157,7 +157,7 @@ class fetch extends external_api {
         $grade = $gradeitem->get_formatted_grade_for_user($gradeduser, $USER);
         $instance = $gradeitem->get_advanced_grading_instance($USER, $grade);
         if (!$instance) {
-            throw new moodle_exception('error:gradingunavailable', 'grading');
+            throw new moodle_exception(" The marking guide is not set up.", "Set up your marking guide or switch to simple direct grading to fix the following issue. ");
         }
         $controller = $instance->get_controller();
         $definition = $controller->get_definition();
