@@ -88,8 +88,8 @@
 	branch = BF_400
 [submodule "blocks/bfmanager"]
 	path = blocks/bfmanager
-	url = https://github.com/mspall/bfmanager.git
-	branch = main
+	url = https://github.com/ITRC/bfmanager.git
+	branch = BF_400
 [submodule "local/bfaltformat"]
 	path = local/bfaltformat
 	url = https://github.com/mspall/bfaltformat.git
