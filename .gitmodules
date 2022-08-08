@@ -96,8 +96,8 @@
 	branch = BF_400
 [submodule "lib/editor/atto/plugins/bflink"]
 	path = lib/editor/atto/plugins/bflink
-	url = https://github.com/mspall/bflink.git
-	branch = main
+	url = https://github.com/ITRC/bflink.git
+	branch = BF_400
 [submodule "filter/bfurltolink"]
 	path = filter/bfurltolink
 	url = https://github.com/mspall/bfurltolink.git
