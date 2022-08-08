@@ -104,8 +104,8 @@
 	branch = BF_400
 [submodule "local/bfnewwindow"]
 	path = local/bfnewwindow
-	url = https://github.com/mspall/bfnewwindow.git
-	branch = main
+	url = https://github.com/ITRC/bfnewwindow.git
+	branch = BF_400
 [submodule "report/editlicence"]
 	path = report/editlicence
 	url = https://github.com/mspall/editlicence.git
