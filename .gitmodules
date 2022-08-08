@@ -108,5 +108,5 @@
 	branch = BF_400
 [submodule "report/editlicence"]
 	path = report/editlicence
-	url = https://github.com/mspall/editlicence.git
-	branch = main
+	url = https://github.com/ITRC/editlicence.git
+	branch = BF_400
