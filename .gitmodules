@@ -100,8 +100,8 @@
 	branch = BF_400
 [submodule "filter/bfurltolink"]
 	path = filter/bfurltolink
-	url = https://github.com/mspall/bfurltolink.git
-	branch = main
+	url = https://github.com/ITRC/bfurltolink.git
+	branch = BF_400
 [submodule "local/bfnewwindow"]
 	path = local/bfnewwindow
 	url = https://github.com/mspall/bfnewwindow.git
