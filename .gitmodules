@@ -118,3 +118,7 @@
 	path = mod/zoom
 	url = https://github.com/mspall/moodle-mod_zoom.git
 	branch = master
+[submodule "mod/hvp"]
+	path = mod/hvp
+	url = https://github.com/mspall/moodle-mod_hvp.git
+	branch = stable
