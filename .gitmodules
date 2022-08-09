@@ -110,3 +110,7 @@
 	path = report/editlicence
 	url = https://github.com/ITRC/editlicence.git
 	branch = BF_400
+[submodule "auth/saml2"]
+	path = auth/saml2
+	url = https://github.com/mspall/moodle-auth_saml2.git
+	branch = MOODLE_39_STABLE
