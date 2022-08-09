@@ -17,8 +17,15 @@
 namespace qbank_statistics;
 
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
+use quiz_statistics_report;
 
 defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->dirroot . '/mod/quiz/report/statistics/statisticslib.php');
+require_once($CFG->dirroot . '/mod/quiz/report/default.php');
+require_once($CFG->dirroot . '/mod/quiz/report/statistics/report.php');
+require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
+require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
 
 /**
  * Helper for statistics
@@ -41,56 +48,61 @@ class helper {
     private const NEED_FOR_REVISION_UPPER_THRESHOLD = 50;
 
     /**
-     * Return contexts where the question is used
+     * Return ids of all quizzes that use the question
      *
      * @param int $questionid id of the question
-     * @return array list of contexts that use the question.
+     * @return array list of quizids
      * @throws \dml_exception
      */
-    public static function get_using_contexts(int $questionid): array {
+    public static function get_quizzes(int $questionid): array {
         global $DB;
 
-        $contexts = $DB->get_records_sql("
-             SELECT DISTINCT qu.contextid, qu.component
-                        FROM {question_usages} qu
+        $quizzes = $DB->get_fieldset_sql("
+             SELECT DISTINCT qa.quiz as id
+                        FROM {quiz_attempts} qa
+                        JOIN {question_usages} qu ON qu.id = qa.uniqueid
                         JOIN {question_attempts} qatt ON qatt.questionusageid = qu.id
                        WHERE qatt.questionid = :questionid",
             ['questionid' => $questionid]
         );
-        return $contexts;
+        return $quizzes;
     }
 
     /**
      * Load question stats from a quiz
      *
-     * @param \stdClass $context context that the question is used
-     * @return all_calculated_for_qubaid_condition|null question stats
+     * @param int $quizid quiz object or its id
+     * @return all_calculated_for_qubaid_condition
      */
-    private static function load_question_stats(\stdClass $context): ?all_calculated_for_qubaid_condition {
-
-        $pluginmanager = \core_plugin_manager::instance();
-        foreach ($pluginmanager->get_subplugins_of_plugin($context->component) as $subpluginname => $subplugin) {
-            if (component_callback_exists($subpluginname, 'calculate_question_stats')) {
-                return component_callback($subpluginname, 'calculate_question_stats', [$context->contextid]);
-            }
+    private static function load_question_stats(int $quizid): all_calculated_for_qubaid_condition {
+        // Turn to quiz object.
+        $quiz = new \stdClass();
+        $quiz->id = $quizid;
+        // All questions, no groups.
+        $report = new quiz_statistics_report();
+        $questions = $report->load_and_initialise_questions_for_calculations($quiz);
+        $qubaids = quiz_statistics_qubaids_condition($quiz->id, new \core\dml\sql_join());
+        $progress = new \core\progress\none();
+        $qcalc = new \core_question\statistics\questions\calculator($questions, $progress);
+        $quizcalc = new \quiz_statistics\calculator($progress);
+        if ($quizcalc->get_last_calculated_time($qubaids) === false) {
+            $questionstats = $qcalc->calculate($qubaids);
+        } else {
+            $questionstats = $qcalc->get_cached($qubaids);
         }
-
-        return null;
+        return $questionstats;
     }
 
     /**
      * Load a specified stats item for a question
      *
-     * @param \stdClass $context question usage
+     * @param int $quizid quiz id
      * @param int $questionid question id
      * @param string $item a stats item
      * @return float|int
      */
-    public static function load_question_stats_item(\stdClass $context, int $questionid, string $item): ?float {
-        $questionstats = self::load_question_stats($context);
-        if (is_null($questionstats)) {
-            return null;
-        }
+    public static function load_question_stats_item(int $quizid, int $questionid, string $item): ?float {
+        $questionstats = self::load_question_stats($quizid);
         // Find in main question.
         foreach ($questionstats->questionstats as $stats) {
             if ($stats->questionid == $questionid && isset($stats->$item)) {
@@ -114,27 +126,27 @@ class helper {
      * @return float|null
      */
     private static function calculate_average_question_stats_item(int $questionid, string $item): ?float {
-        $contexts = self::get_using_contexts($questionid);
+        $quizzes = self::get_quizzes($questionid);
 
         $sum = 0;
-        $count = count($contexts);
-        foreach ($contexts as $context) {
-            $value = self::load_question_stats_item($context, $questionid, $item);
+        $quizcount = count($quizzes);
+        foreach ($quizzes as $quizid) {
+            $value = self::load_question_stats_item($quizid, $questionid, $item);
             if (!is_null($value)) {
                 $sum += $value;
             } else {
                 // Exclude this value when it is null.
-                $count--;
+                $quizcount--;
             }
         }
 
         // Return null if there is no quizzes.
-        if (empty($count)) {
+        if (empty($quizcount)) {
             return null;
         }
 
         // Average value per quiz.
-        $average = $sum / $count;
+        $average = $sum / $quizcount;
         return $average;
     }
 
