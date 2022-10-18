@@ -156,7 +156,9 @@ switch($requestmethod) {
                         foreach ($ids as $id) {
                             $slot = $DB->get_record('quiz_slots', array('quizid' => $quiz->id, 'id' => $id),
                                     '*', MUST_EXIST);
-                            $structure->remove_slot($slot->slot);
+                            if (quiz_has_question_use($quiz, $slot->slot)) {
+                                $structure->remove_slot($slot->slot);
+                            }
                         }
                         quiz_delete_previews($quiz);
                         quiz_update_sumgrades($quiz);
