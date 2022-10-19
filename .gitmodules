@@ -126,3 +126,7 @@
 	path = blocks/configurable_reports
 	url = https://github.com/mspall/moodle-block_configurablereports.git
 	branch = MOODLE_36_STABLE
+[submodule "report/customsql"]
+	path = report/customsql
+	url = https://github.com/mspall/moodle-report_customsql.git
+	branch = main
