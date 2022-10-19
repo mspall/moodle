@@ -122,3 +122,7 @@
 	path = mod/hvp
 	url = https://github.com/mspall/moodle-mod_hvp.git
 	branch = stable
+[submodule "blocks/configurable_reports"]
+	path = blocks/configurable_reports
+	url = https://github.com/mspall/moodle-block_configurablereports.git
+	branch = MOODLE_36_STABLE
