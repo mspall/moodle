@@ -130,3 +130,11 @@
 	path = report/customsql
 	url = https://github.com/mspall/moodle-report_customsql.git
 	branch = main
+[submodule "blocks/intelligent_learning"]
+	path = blocks/intelligent_learning
+	url = https://github.com/mspall/release-moodle-block_intelligent_learning.git
+	branch = main
+[submodule "local/mr"]
+	path = local/mr
+	url = https://github.com/mspall/moodle-local_mr.git
+	branch = MOODLE_311_STABLE
